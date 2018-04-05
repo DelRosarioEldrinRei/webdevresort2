@@ -1,0 +1,85 @@
+html(lang='en')
+	head
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+		meta(name='description', content='')
+		meta(name='author', content='')
+		title Villa Martha Resort
+		link(href='/css/bootstrap.min.css', rel='stylesheet')
+		link(href='/css/tempusdominus-bootstrap-4.min.css', rel='stylesheet')
+		link(href='/css/font-awesome.min.css', rel='stylesheet')
+		link(rel="stylesheet" href="/css/ekko-lightbox.css")
+		link(rel='icon', href='/img/logoico.ico')
+		link(href='/css/heroic-features.css', rel='stylesheet')
+
+	body
+		block body
+	script(src='/js/jquery.min.js')
+	script(src='/js/moment.min.js')
+	script(src="/js/ekko-lightbox.min.js")
+	script(src="/js/sweetalert2.all.min.js")
+	script(src='/js/tempusdominus-bootstrap-4.min.js')
+	script(src='/js/bootstrap.bundle.js')
+	block addjs
+	script.
+		$(document).ready(function(){
+			$('.btn-delete').on('click', function(){
+				var x = $(this).parents('tr.text-center').find('.reserveid').text()
+				swal({
+					title: 'Are you sure?',
+					text: "You won't be able to revert this!",
+					type: 'warning',
+					showCancelButton: true,
+					cancelButtonColor: '#d33',
+					confirmButtonColor: '#28a745',
+					confirmButtonText: 'Confirm'
+				}).then((result) => {
+					if (result.value) {
+						swal({
+							title: 'success',
+							text: 'Customer payment has been approved.',
+							type: 'success',
+							showConfirmButton: false
+						})
+						setTimeout(function(){
+
+						location.href = '/admin/verifypending/'+x
+						}, 1000)
+					}
+				})
+			});
+			$(document).on('click', ".btn-confirm", function(){
+				
+				var x = $(this).parents('tr.text-center').find('.reserveid').text()
+						
+				swal({
+					title: 'Are you sure?',
+					text: "Confirm the customer to be paid",
+					type: 'info',
+					showCancelButton: true,
+					confirmButtonColor: '#28a745',
+					cancelButtonColor: '#d33',
+					confirmButtonText: "Yes I'm Sure" 
+				}).then((result) => {
+					if (result.value) {
+						swal({
+							title: 'success',
+							text: 'Customer payment has been approved.',
+							type: 'success',
+							showConfirmButton: false
+						})
+						setTimeout(function(){
+
+						location.href = '/admin/verifypending/'+x
+						}, 1000)
+					}
+				})
+				
+			
+			$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+				event.preventDefault();
+				$(this).ekkoLightbox();
+			});
+		});
+		});
+		

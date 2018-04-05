@@ -1,0 +1,36 @@
+extends ../../../templates/base
+
+block body
+	style(type="text/css").
+		body {
+			padding-top: 4rem;
+			background-image: linear-gradient(to right bottom, rgba(41, 152, 255, 0.40), rgba(86, 67, 250, 0.40)), url(img/slide_2.jpg);
+			background-position: center;
+		}
+	.container
+		//- figure.text-center
+		//- 	a(href="#")
+		//- 		img.img-fluid.full_logo.shadow(src="img/full_logo.jpg", alt="")
+		.row
+			.col-sm-5.mx-auto
+				.card.m-3
+					.card-body.shadow
+						.container
+							h3 Signup
+							form(method="POST" action=`/signup${user ? `/${user.id}?_method=PUT` : ''}`)
+								.form-group
+									label(for='exampleInputEmail1') First Name:
+									input#exampleInputEmail1.form-control(type='text', name="first" placeholder='Enter First Name' important)
+								.form-group
+									label(for='exampleInputEmail1') Last Name:
+									input#exampleInputEmail1.form-control(type='text', name="last" placeholder='Enter Last Name' important)
+								.form-group
+									label(for='exampleInputEmail1') Email address:
+									input#exampleInputEmail1.form-control(type='email', name="email" aria-describedby='emailHelp', placeholder='Enter email' important)
+									small#emailHelp.form-text.text-muted We'll never share your email with anyone else.
+								.form-group
+									label(for='exampleInputPassword1') Password:
+									input#exampleInputPassword1.form-control(type='password', name="password" placeholder='Password' important)
+								button.btn.btn-primary.btn-block(type='submit') Register
+								a(href="/login").text-left.mt-2.ml-2
+									| Go Back

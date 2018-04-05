@@ -1,0 +1,28 @@
+extends ../../../templates/master
+
+block main
+	h1.m-3 Verify Customer Reservation
+	//- .mx-3.my-2
+	//- 	a.btn.btn-warning(type='button' href="/admin/verifypending") Pending
+	//- 	a.btn.btn-info(type='button' href="/admin/verifyfinished") Finished
+	.mx-3
+		table.table.table-striped.table-bordered.w-100
+			caption Verify Reservation of Customers
+			thead.table-primary
+				tr.text-center
+					th(scope='col') #
+					th(scope='col') First
+					th(scope='col') Last
+					th(scope='col') Date
+					th(scope='col') Actions
+			tbody
+				//- if custInfo1 && custInfo1.length > 0
+				each info in custInfo
+					tr
+						th.text-center(scope='row') #{info.intReserveID}
+						td.text-center #{info.strFirstname}
+						td.text-center #{info.strLastname}
+						td.text-center #{info.datDate.toLocaleString().split(' ')[0]}
+						td.text-center
+							a.h3.text-primary(href=`/admin/reports/${custInfo.intReserveID}`)
+								i.fa.fa-list-alt(aria-hidden='true')

@@ -1,0 +1,28 @@
+extends ../../../templates/master
+block prepend main
+	center.mx-3
+		h1.my-4.text-center.text-lg-left Thumbnail Gallery
+			if currentUser.isAdmin
+				button.btn.btn-primary.btn-lg.float-lg-right.float-sm-center(data-toggle="modal" data-target="#exampleModal") Add Photo 
+			#exampleModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='exampleModalLabel', aria-hidden='true')
+				.modal-dialog(role='document')
+					.modal-content
+						.modal-header
+							h5#exampleModalLabel.modal-title Add Photo
+							button.close(type='button', data-dismiss='modal', aria-label='Close')
+								span(aria-hidden='true') ×
+						.modal-body
+							form.font-normal(method="POST" enctype="multipart/form-data" action='/gallery')
+								.form-group
+									label(for='exampleFormControlFile1') Choose files
+									input#exampleFormControlFile1.form-control-file(type='file' name="strImage" accept="image/*")
+
+								.modal-footer
+									button.btn.btn-primary(type='submit') Upload
+									button.btn.btn-secondary(type='button', data-dismiss='modal') Cancel
+
+		.row.text-center.text-lg-left
+			each image in images
+				.col-lg-4.col-md-4.col-sm-6
+					a.d-block.mb-4(href=`/img/uploads/${image.strImage}?image=250` data-toggle="lightbox" data-max-width="900")
+						img.img-fluid.img-thumbnail.min-height(src=`/img/uploads/${image.strImage}?image=250`, alt='')

@@ -1,0 +1,40 @@
+extends ../../../templates/base
+block body
+	style(type="text/css").
+		body {
+			padding-top: 2rem;
+			background-image: linear-gradient(to right bottom, rgba(41, 152, 255, 0.40), rgba(86, 67, 250, 0.40)), url(img/slide_2.jpg);
+			background-position: center;
+		}
+	- var hasIncorrect = typeof incorrect !== 'undefined' ? 'Incorrect username or password.' : ''
+	- var hasUnauthorized = typeof unauthorized !== 'undefined' ? 'You are not authorized to view the page you\'re trying to access. Please log in first.' : ''
+
+	//- if hasIncorrect || hasUnauthorized
+	//- 	.container
+	//- 		.alert.alert-danger(role='alert')
+	//- 			| #{hasIncorrect || hasUnauthorized}
+
+	figure.text-center
+		a(href="/login")
+			img.img-fluid.full_logo.shadow(src="img/full_logo.jpg", alt="")
+	.container
+		.row
+			.col-sm-5.mx-auto
+				.card.m-3
+					.card-body.shadow
+						.container
+							h3 Login
+							form(method="POST" action="/login")
+								.form-group
+									label(for='exampleInputEmail1') Email address:
+									input#exampleInputEmail1.form-control(type='email', name="email" aria-describedby='emailHelp', placeholder='Enter email')
+									small#emailHelp.form-text.text-muted We'll never share your email with anyone else.
+								.form-group
+									label(for='exampleInputPassword1') Password:
+									//- a.float-right(href='#') Forgot Password?
+									input#exampleInputPassword1.form-control(type='password', name="password" placeholder='Password')
+								button.btn.btn-primary.btn-block(type='submit') Log-in
+								.text-center.mt-2
+									| Dont have an account? 
+									a(href="/signup") Create one
+									iframe(src='https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button_count&size=large&mobile_iframe=true&width=106&height=28&appId', width='106', height='28', style='border:none;overflow:hidden', scrolling='no', frameborder='0', allowtransparency='true')

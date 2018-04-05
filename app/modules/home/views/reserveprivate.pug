@@ -1,0 +1,35 @@
+extends ../../../templates/master
+
+block main
+	.container
+		.row
+			.col-sm-12.mx-auto
+				.container.mt-3
+					form(method="POST" action="/reserve/private")#regForm
+						.container
+							.row
+								h3.ml-4 Reserve Details
+							.row
+								.col-sm-6.pl-0
+									.form-group
+										#datetimepicker4.input-group.date(data-target-input='nearest')
+											input.form-control.datetimepicker-input.mt-4(id='datetimepicker1',type='text', data-target='#datetimepicker1', name='datDate',placeholder="Input Date")
+											.input-group-append.mt-4(data-target='#datetimepicker4', data-toggle='datetimepicker')
+												.input-group-text
+													i.fa.fa-calendar(aria-hidden='true')
+								.col-sm-6.pl-0
+									h3.mt-4 Price: ₱
+										span 30,000.00
+						.text-right
+							button.btn.btn-success.ml-1(type="submit") Submit
+block addjs
+	script.
+		let start = moment().add(7, 'days').calendar();
+		$(function () {
+			$('#datetimepicker4').datetimepicker({
+				format: 'YYYY-MM-DD',
+				minDate: start
+			});
+		});
+	script.
+		//- var date = $("#datetimepicker1").data("datetimepicker").getDate();
